@@ -1,0 +1,37 @@
+{
+  "license": "ISC",
+  "scripts": {
+    "format": "ruff check --fix ./backlog_dl ./tests && ruff format ./backlog_dl ./tests",
+    "lint": "cspell './backlog_dl/*.py' './tests/*.py' && ruff check --fix ./backlog_dl ./tests && pyright ./backlog_dl ./tests",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "cspell": "^5.19.3",
+    "lint-staged": "^11.1.2",
+    "pyright": "^1.1.361",
+    "simple-git-hooks": "^2.5.1"
+  },
+  "cspell": {
+    "dictionaries": [
+      "ignore-words"
+    ],
+    "dictionaryDefinitions": [
+      {
+        "name": "ignore-words",
+        "path": ".cspell-ignore-words.txt",
+        "addWords": true
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.py": [
+      "cspell",
+      "ruff check --fix",
+      "ruff format",
+      "pyright"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  }
+}
